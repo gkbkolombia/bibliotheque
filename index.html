@@ -1,160 +1,183 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Accueil - Bibliothèque Scolaire</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <style>
-    body { font-family: Arial, sans-serif; background: #f8f9fa; margin: 0; }
-    header { background: #2c3e50; color: white; padding: 20px; text-align: center; }
-    h1 { margin: 0; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Accueil - Bibliothèque Scolaire</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+  body { font-family: Arial, sans-serif; background: #f8f9fa; margin: 0; }
+  header { background: #2c3e50; color: white; padding: 20px; text-align: center; }
+  h1 { margin: 0; }
 
-    .container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 15px;
-      padding: 20px;
-      max-width: 1000px;
-      margin: auto;
-    }
-    .btn-matiere {
-      display: block;
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      text-decoration: none;
-      color: #2c3e50;
-      font-weight: bold;
-      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
-      transition: 0.3s;
-      text-align: center;
-    }
-    .btn-matiere:hover {
-      background: #2980b9;
-      color: white;
-      transform: scale(1.05);
-    }
-    .btn-matiere i { font-size: 24px; margin-bottom: 10px; display: block; }
+  .container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+    padding: 20px;
+    max-width: 1000px;
+    margin: auto;
+  }
+  .btn-matiere {
+    display: block;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #2c3e50;
+    font-weight: bold;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    transition: 0.3s;
+    text-align: center;
+  }
+  .btn-matiere:hover {
+    background: #2980b9;
+    color: white;
+    transform: scale(1.05);
+  }
+  .btn-matiere i { font-size: 24px; margin-bottom: 10px; display: block; }
 
-    #searchInput { padding:10px; width:60%; border-radius:5px; border:1px solid #ccc; }
-    #searchBtn { padding:10px 15px; border:none; background:#2980b9; color:white; border-radius:5px; cursor:pointer; }
-    #searchContainer { text-align:center; margin:20px; position:relative; }
+  #searchInput { padding:10px; width:60%; border-radius:5px; border:1px solid #ccc; }
+  #searchBtn { padding:10px 15px; border:none; background:#2980b9; color:white; border-radius:5px; cursor:pointer; }
+  #searchContainer { text-align:center; margin:20px; position:relative; }
 
-    #suggestionList {
-      position:absolute; 
-      top:45px; 
-      left:20%; 
-      width:60%; 
-      background:white; 
-      border:1px solid #ccc; 
-      border-radius:5px; 
-      max-height:200px; 
-      overflow-y:auto; 
-      list-style:none; 
-      padding:0; 
-      margin:0;
-      z-index:1000;
-    }
-    #suggestionList li { padding:5px 10px; cursor:pointer; }
-    #suggestionList li:hover { background:#2980b9; color:white; }
+  #suggestionList {
+    position:absolute; 
+    top:45px; 
+    left:20%; 
+    width:60%; 
+    background:white; 
+    border:1px solid #ccc; 
+    border-radius:5px; 
+    max-height:200px; 
+    overflow-y:auto; 
+    list-style:none; 
+    padding:0; 
+    margin:0;
+    z-index:1000;
+  }
+  #suggestionList li { padding:5px 10px; cursor:pointer; }
+  #suggestionList li:hover { background:#2980b9; color:white; }
 
-    #resultatsRecherche { max-width:800px; margin:auto; padding:20px; }
+  #resultatsRecherche { max-width:800px; margin:auto; padding:20px; }
 
-    footer { margin-top: 30px; padding: 15px; background: #2c3e50; color: white; text-align: center; }
-  </style>
+  footer { margin-top: 30px; padding: 15px; background: #2c3e50; color: white; text-align: center; }
+</style>
 </head>
 <body>
 
-  <header>
-    <h1>📚 Bibliothèque Scolaire</h1>
-  </header>
+<header>
+  <h1>📚 Bibliothèque Scolaire</h1>
+</header>
 
-  <div id="searchContainer">
-    <input type="text" id="searchInput" placeholder="🔍 Rechercher un document..." oninput="suggestions()">
-    <button id="searchBtn" onclick="rechercher()">Rechercher</button>
-    <ul id="suggestionList"></ul>
-  </div>
+<div id="searchContainer">
+  <input type="text" id="searchInput" placeholder="🔍 Rechercher un document..." oninput="suggestions()">
+  <button id="searchBtn" onclick="rechercher()">Rechercher</button>
+  <ul id="suggestionList"></ul>
+</div>
 
-  <div class="container" id="matiereContainer">
-    <p>Chargement des matières...</p>
-  </div>
+<div class="container" id="matiereContainer">
+  <p>Chargement des matières...</p>
+</div>
 
-  <div id="resultatsRecherche"></div>
+<div id="resultatsRecherche"></div>
 
-  <footer>
-    © 2025 CS St RAPHAEL - Bibliothèque scolaire
-  </footer>
+<footer>
+  © 2025 CS St RAPHAEL - Bibliothèque scolaire
+</footer>
 
-  <script>
-    let matieresCache = [];
-    let tousPDFs = [];
+<script>
+let matieresCache = [];
+let tousPDFs = [];
 
-    fetch("json/matieres.json")
-      .then(r => r.json())
-      .then(data => {
-        matieresCache = data;
-        let container = document.getElementById("matiereContainer");
-        container.innerHTML = "";
-        data.forEach(m => {
-          let link = document.createElement("a");
-          link.href = `matiere.html?matiere=${m.id}`;
-          link.className = "btn-matiere";
-          link.innerHTML = `<i class="${m.icone}"></i> ${m.titre}`;
-          container.appendChild(link);
-        });
-        Promise.all(data.map(m => fetch(`json/${m.id}.json`).then(r => r.json())))
-          .then(jsons => {
-            jsons.forEach(m => {
-              m.pdfs.forEach(f => tousPDFs.push({fichier:f, matiere:m.titre}));
-            });
-          });
-      })
-      .catch(err => {
-        document.getElementById("matiereContainer").innerHTML =
-          "<p style='color:red'>⚠️ Impossible de charger la liste des matières.</p>";
-      });
+// Chargement des matières
+fetch("json/matieres.json")
+  .then(r => r.json())
+  .then(data => {
+    matieresCache = data;
+    let container = document.getElementById("matiereContainer");
+    container.innerHTML = "";
+    data.forEach(m => {
+      let link = document.createElement("a");
+      link.href = matiere.html?matiere=${m.id};
+      link.className = "btn-matiere";
+      link.innerHTML = <i class="${m.icone}"></i> ${m.titre};
+      container.appendChild(link);
+    });
 
-    const suggestionList = document.getElementById("suggestionList");
+    // Chargement des PDFs
+    data.forEach(m => {
+      fetch(json/${m.id}.json)
+        .then(r => r.json())
+        .then(mjson => {
+          mjson.pdfs.forEach(f => tousPDFs.push({fichier:f, matiere:m.titre}));
+        })
+        .catch(err => console.warn(Impossible de charger json/${m.id}.json));
+    });
+  })
+  .catch(err => {
+    document.getElementById("matiereContainer").innerHTML =
+      "<p style='color:red'>⚠ Impossible de charger la liste des matières.</p>";
+  });
 
-    function suggestions() {
-      let val = document.getElementById("searchInput").value.toLowerCase();
-      suggestionList.innerHTML = "";
-      if (!val) return;
+// Suggestions dynamiques
+const suggestionList = document.getElementById("suggestionList");
 
-      let matches = tousPDFs.filter(d => d.fichier.toLowerCase().includes(val)).slice(0, 10);
-      matches.forEach(match => {
-        let li = document.createElement("li");
-        li.textContent = `${match.matiere} → ${match.fichier.split("/").pop()}`;
-        li.onclick = () => { window.open(match.fichier, "_blank"); suggestionList.innerHTML=""; };
-        suggestionList.appendChild(li);
-      });
-    }
+function suggestions() {
+  const val = document.getElementById("searchInput").value.toLowerCase();
+  suggestionList.innerHTML = "";
+  if (!val) return;
 
-    function rechercher() {
-      let motCle = document.getElementById("searchInput").value.toLowerCase().trim();
-      let resultatsDiv = document.getElementById("resultatsRecherche");
-      suggestionList.innerHTML = "";
-      resultatsDiv.innerHTML = "<p>⏳ Recherche en cours...</p>";
+  const matches = tousPDFs.filter(d => 
+    d.fichier.toLowerCase().includes(val) || d.matiere.toLowerCase().includes(val)
+  ).slice(0,10);
 
-      if (!motCle) {
-        resultatsDiv.innerHTML = "<p style='color:red'>⚠️ Entrez un mot clé.</p>";
-        return;
-      }
+  matches.forEach(match => {
+    let li = document.createElement("li");
+    li.textContent = ${match.matiere} → ${match.fichier.split("/").pop()};
+    li.onclick = () => {
+      window.open(https://docs.google.com/gview?url=${encodeURIComponent(match.fichier)}&embedded=true, "_blank");
+      suggestionList.innerHTML="";
+    };
+    suggestionList.appendChild(li);
+  });
+}
 
-      let resultats = tousPDFs.filter(d => d.fichier.toLowerCase().includes(motCle));
+// Rechercher
+function rechercher() {
+  const motCle = document.getElementById("searchInput").value.toLowerCase().trim();
+  const resultatsDiv = document.getElementById("resultatsRecherche");
+  suggestionList.innerHTML = "";
+  resultatsDiv.innerHTML = "<p>⏳ Recherche en cours...</p>";
 
-      if (resultats.length === 0) {
-        resultatsDiv.innerHTML = "<p style='color:orange'>😢 Aucun document trouvé.</p>";
-      } else {
-        let html = "<h3>Résultats :</h3><ul>";
-        resultats.forEach(r => {
-          html += `<li><b>${r.matiere}</b> → <a href="${r.fichier}" target="_blank">${r.fichier.split("/").pop()}</a></li>`;
-        });
-        html += "</ul>";
-        resultatsDiv.innerHTML = html;
-      }
-    }
-  </script>
+  if (!motCle) {
+    resultatsDiv.innerHTML = "<p style='color:red'>⚠ Entrez un mot clé.</p>";
+    return;
+  }
+
+  const resultats = tousPDFs.filter(d => 
+    d.fichier.toLowerCase().includes(motCle) || d.matiere.toLowerCase().includes(motCle)
+  );
+
+  if (resultats.length === 0) {
+    resultatsDiv.innerHTML = "<p style='color:orange'>😢 Aucun document trouvé.</p>";
+  } else {
+    let html = "<h3>Résultats :</h3><ul>";
+    resultats.forEach(r => {
+      const nomFichier = r.fichier.split("/").pop();
+      html += <li><b>${r.matiere}</b> → <a href="https://docs.google.com/gview?url=${encodeURIComponent(r.fichier)}&embedded=true" target="_blank">${nomFichier}</a></li>;
+    });
+    html += "</ul>";
+    resultatsDiv.innerHTML = html;
+  }
+}
+
+// Fermer suggestions si clic en dehors
+document.addEventListener('click', e => {
+  if (!document.getElementById('searchContainer').contains(e.target)) {
+    suggestionList.innerHTML = "";
+  }
+});
+</script>
 </body>
 </html>
